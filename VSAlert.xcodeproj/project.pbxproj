@@ -30,6 +30,9 @@
 		0710F9D41F8BCDBE00C6D084 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0710F9D21F8BCDB700C6D084 /* CoreGraphics.framework */; };
 		074538171F8C437700092DAF /* VSAlertControllerTransitionAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 074538151F8C437700092DAF /* VSAlertControllerTransitionAnimator.h */; };
 		074538191F8C437700092DAF /* VSAlertControllerTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 074538161F8C437700092DAF /* VSAlertControllerTransitionAnimator.m */; };
+		07A14A451F901FA500309776 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A14A441F901FA500309776 /* MobileCoreServices.framework */; };
+		07A14A461F901FB400309776 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A7C4071F8D655700A71580 /* UIKit.framework */; };
+		07A14A471F901FB800309776 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A14A441F901FA500309776 /* MobileCoreServices.framework */; };
 		07F25AB81F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 07F25AB61F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.h */; };
 		07F25AB91F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F25AB71F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.m */; };
 		07F25ABA1F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F25AB71F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.m */; };
@@ -85,6 +88,7 @@
 		0710F9D21F8BCDB700C6D084 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		074538151F8C437700092DAF /* VSAlertControllerTransitionAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VSAlertControllerTransitionAnimator.h; sourceTree = "<group>"; };
 		074538161F8C437700092DAF /* VSAlertControllerTransitionAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VSAlertControllerTransitionAnimator.m; sourceTree = "<group>"; };
+		07A14A441F901FA500309776 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		07A7C4051F8D655100A71580 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		07A7C4071F8D655700A71580 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		07F00EFF1F8A972D006FAC96 /* libVSAlert.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libVSAlert.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A14A471F901FB800309776 /* MobileCoreServices.framework in Frameworks */,
+				07A14A461F901FB400309776 /* UIKit.framework in Frameworks */,
 				0710F9D41F8BCDBE00C6D084 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A14A451F901FA500309776 /* MobileCoreServices.framework in Frameworks */,
 				07FF9E221F8FEFE8002966A3 /* CoreGraphics.framework in Frameworks */,
 				07FF9E211F8FEFE2002966A3 /* UIKit.framework in Frameworks */,
 				07FF9E201F8FEFDE002966A3 /* Foundation.framework in Frameworks */,
@@ -156,6 +163,7 @@
 		0710F9D11F8BCDB700C6D084 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07A14A441F901FA500309776 /* MobileCoreServices.framework */,
 				07A7C4071F8D655700A71580 /* UIKit.framework */,
 				07A7C4051F8D655100A71580 /* Foundation.framework */,
 				0710F9D21F8BCDB700C6D084 /* CoreGraphics.framework */,

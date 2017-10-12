@@ -62,7 +62,7 @@ static os_log_t alert_log;
 @synthesize alertMessageTextColor = _alertMessageTextColor;
 @synthesize alertTitleTextFont = _alertTitleTextFont;
 @synthesize alertMessageTextFont = _alertMessageTextFont;
-@synthesize textFields = _textFields;
+@synthesize textfields = _textfields;
 @synthesize animationStyle = _animationStyle;
 @synthesize dismissOnBackgroundTap = _dismissOnBackgroundTap;
 @synthesize style = _style;
@@ -282,7 +282,7 @@ static os_log_t alert_log;
 
 - (BOOL)hasTextFieldAdded {
     
-    return self.textFields.count > 0;
+    return self.textfields.count > 0;
     
 }
 
@@ -426,7 +426,7 @@ static os_log_t alert_log;
     }
     
     // Store textfield for use in -viewDidLoad
-    _textFields = [_textFields arrayByAddingObject:textfield];
+    _textfields = [_textfields arrayByAddingObject:textfield];
     
 }
 
@@ -446,7 +446,7 @@ static os_log_t alert_log;
     _destructiveActions = [[NSArray<VSAlertAction *> alloc] init];
     _cancelActions = [[NSArray<VSAlertAction *> alloc] init];
     _tempFrameOrigin = CGPointMake(0.0f, 0.0f);
-    _textFields = [[NSArray<UITextField *> alloc] init];
+    _textfields = [[NSArray<UITextField *> alloc] init];
     _presentAnimator = [[VSAlertControllerTransitionAnimator alloc] init];
     _dismissAnimator = [[VSAlertControllerTransitionAnimator alloc] init];
     
@@ -877,9 +877,9 @@ static os_log_t alert_log;
 - (void)_processTextFields {
     
     // Display Text Fields
-    for (UITextField *textField in self.textFields) {
+    for (UITextField *textfield in self.textfields) {
         
-        [self _addTextField:textField];
+        [self _addTextField:textfield];
         
     }
     
@@ -893,7 +893,7 @@ static os_log_t alert_log;
         
     }
     
-    NSInteger totalActions = _cancelActions.count + _destructiveActions.count + _defaultActions.count + self.textFields.count;
+    NSInteger totalActions = _cancelActions.count + _destructiveActions.count + _defaultActions.count + self.textfields.count;
     
     if (totalActions > 2 || _style == VSAlertControllerStyleActionSheet) {
         

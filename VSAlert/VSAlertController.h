@@ -223,7 +223,7 @@ typedef NS_ENUM(NSInteger, VSAlertControllerAnimationStyle) {
 /**
  Returns the array of text field objects that are displayed in the alert, so you can interact with the user's inputs.
  */
-@property (NS_NONATOMIC_IOSONLY, strong, readonly, nonnull) NSArray<UITextField *> *textFields;
+@property (NS_NONATOMIC_IOSONLY, strong, readonly, nonnull) NSArray<UITextField *> *textfields;
 
 /**
  The title of the alert
