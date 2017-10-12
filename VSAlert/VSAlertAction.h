@@ -91,9 +91,9 @@ typedef NS_ENUM(NSInteger, VSAlertActionStyle) {
  */
 
 /**
- The title of the alert
+ The title of the action
  */
-@property (NS_NONATOMIC_IOSONLY, copy, readonly, nullable) NSString *alertTitle;
+@property (NS_NONATOMIC_IOSONLY, copy, readonly, nullable) NSString *actionTitle;
 
 /**
  The display style of the alert

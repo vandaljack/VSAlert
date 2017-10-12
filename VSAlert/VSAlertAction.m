@@ -24,7 +24,7 @@
 @synthesize destructiveActionTextColor = _destructiveActionTextColor;
 @synthesize actionTextFont = _actionTextFont;
 @synthesize cancelActionTextFont = _cancelActionTextFont;
-@synthesize alertTitle = _alertTitle;
+@synthesize actionTitle = _actionTitle;
 @synthesize style = _style;
 @synthesize action = _action;
 
@@ -51,7 +51,7 @@
         
         _style = VSAlertActionStyleDefault;
         _action = nil;
-        _alertTitle = @"";
+        _actionTitle = @"";
         
         [self _setUpAlertAction];
         
@@ -69,7 +69,7 @@
         
         _style = VSAlertActionStyleDefault;
         _action = nil;
-        _alertTitle = @"";
+        _actionTitle = @"";
         
         [self _setUpAlertAction];
         
@@ -165,7 +165,7 @@
 
         _style = style;
         _action = action;
-        _alertTitle = title;
+        _actionTitle = title;
         
         [self _setUpAlertAction];
         
@@ -183,7 +183,7 @@
     _destructiveActionTextColor = [UIColor redColor];
     _actionTextFont = [UIFont systemFontOfSize:17.0f weight:UIFontWeightRegular];
     
-    [self setTitle:self.alertTitle forState:UIControlStateNormal];
+    [self setTitle:self.actionTitle forState:UIControlStateNormal];
     
     [self setTitleColor:self.style == VSAlertActionStyleDestructive ? _destructiveActionTextColor : _actionTextColor forState:UIControlStateNormal];
     [self setTitleColor:self.style == VSAlertActionStyleDestructive ? [_destructiveActionTextColor colorWithAlphaComponent:0.5f] : [_actionTextColor colorWithAlphaComponent:0.5f] forState:UIControlStateHighlighted];
