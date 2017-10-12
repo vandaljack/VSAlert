@@ -21,7 +21,7 @@ An drop-in replacement for UIAlertController that looks a hell of a lot better, 
 1. VSAlert allows for more runtime level customization.
 2. VSAlert allows allows for global customization using Apple's `UIAppearance` API.
 2. VSAlert adds the "destructive" action style from Apple's UIAlertController that was missing in PMAlertController.
-3. VSAlert doesn't add actions and text fields in the order you create them, but rather in a dynamic order based on how many there are and what "style" they are (again, like Apple'sUIAlertController)
+3. VSAlert doesn't add actions and text fields in the order you create them, but rather in a dynamic order based on how many there are and what "style" they are (again, like Apple's UIAlertController)
 5. VSAlert adds the "Action Sheet" style from Apple's UIAlertController, missing from PMAlertController.
 4. VSAlert executes action blocks on the main-thread, to allow for UI actions and not get caught up by the main thread checker in Xcode 9.
 6. VSAlert uses propertransition, and respects the `animated` parameter in UIViewController's `-presentViewController:animated:completion:` method
@@ -30,12 +30,12 @@ An drop-in replacement for UIAlertController that looks a hell of a lot better, 
 
 ### Just Give Me The Code
 
-VSAlert is packaged as a static library (with slices for all modern iPhones and the simulator), but the six files for the three classes that comprise the library are also available in the repo. Open the project, build the "Framework" targetfor "Generic iOS Device"  if you want to re-compile the static library. The framework is built as a clang module, so you can use the `@import module;` syntax. (More info here: https://clang.llvm.org/docs/Modules.html). VSAlert makes use of Objective-C categories, so you'll need to add the appropriate linker flags.
+VSAlert is packaged as a static library (with slices for all modern iPhones and the simulator), but the six files for the three classes that comprise the library are also available in the repo. Open the project, build the "Framework" target for "Generic iOS Device"  if you want to re-compile the static library. The framework is built as a clang module, so you can use the `@import module;` syntax, and is also built with bitcode. (More info here: [https://clang.llvm.org/docs/Modules.html](https://clang.llvm.org/docs/Modules.html)). VSAlert makes use of Objective-C categories, so you'll need to add the appropriate linker flags.
 
 ### Getting Started (Static Framework)
 
 1. Go to `(RepoDirectory)/Release/VSAlert.framework`, and add it to your project directory.
-2. In your app target's settings, go to "General" --> "Linked Frameworks and Libraries", and add `VSAlert.framework`
+2. In your app target's settings, go to `General` --> `Linked Frameworks and Libraries`, and add `VSAlert.framework`
 3. In your target's build settings, go to "Other Linker Flags", and add `-all_load` and `-ObjC`.
 
 ### Getting Started (Using the source code directly)
