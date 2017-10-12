@@ -1,4 +1,4 @@
-# VSAlert
+# README
 
 ## About
 
