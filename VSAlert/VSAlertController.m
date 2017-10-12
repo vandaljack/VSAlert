@@ -16,15 +16,16 @@ NSString * const VSAlertControllerTextFieldInvalidException = @"VSAlertControlle
 
 @interface VSAlertController ()<UIViewControllerTransitioningDelegate>
 
-@property (NS_NONATOMIC_IOSONLY, strong) UIImageView *alertMaskBackground;
+@property (NS_NONATOMIC_IOSONLY, strong) UIImageView *alertMaskBackgroundImageView;
 @property (NS_NONATOMIC_IOSONLY, strong) UIView *alertView;
 @property (NS_NONATOMIC_IOSONLY, strong) UIView *headerView;
 @property (NS_NONATOMIC_IOSONLY, strong) NSLayoutConstraint *headerViewHeightConstraint;
-@property (NS_NONATOMIC_IOSONLY, strong) UIImageView *alertImage;
-@property (NS_NONATOMIC_IOSONLY, strong) UILabel *alertTitle;
-@property (NS_NONATOMIC_IOSONLY, strong) UILabel *alertMessage;
+@property (NS_NONATOMIC_IOSONLY, strong) UIImageView *alertImageView;
+@property (NS_NONATOMIC_IOSONLY, strong) UILabel *alertTitleLabel;
+@property (NS_NONATOMIC_IOSONLY, strong) NSLayoutConstraint *alertTitleLabelHeightConstraint;
+@property (NS_NONATOMIC_IOSONLY, strong) UILabel *alertMessageLabel;
 @property (NS_NONATOMIC_IOSONLY, strong) UIStackView *alertActionStackView;
-@property (NS_NONATOMIC_IOSONLY, strong) NSLayoutConstraint *alertStackViewHeightConstraint;
+@property (NS_NONATOMIC_IOSONLY, strong) NSLayoutConstraint *alertActionStackViewHeightConstraint;
 @property (NS_NONATOMIC_IOSONLY, strong) UITapGestureRecognizer *tapRecognizer;
 
 @property (NS_NONATOMIC_IOSONLY, readonly) CGFloat alertStackViewHeight;
@@ -65,20 +66,22 @@ static os_log_t alert_log;
 @synthesize animationStyle = _animationStyle;
 @synthesize dismissOnBackgroundTap = _dismissOnBackgroundTap;
 @synthesize style = _style;
+@synthesize alertTitle = _alertTitle;
 @synthesize message = _message;
 @synthesize image = _image;
 @synthesize delegate = _delegate;
 
 // Explicitly synthesize Ivars from extension
-@synthesize alertMaskBackground = _alertMaskBackground;
+@synthesize alertMaskBackgroundImageView = _alertMaskBackgroundImageView;
 @synthesize alertView = _alertView;
 @synthesize headerView = _headerView;
 @synthesize headerViewHeightConstraint = _headerViewHeightConstraint;
-@synthesize alertImage = _alertImage;
-@synthesize alertTitle = _alertTitle;
-@synthesize alertMessage = _alertMessage;
+@synthesize alertImageView = _alertImageView;
+@synthesize alertTitleLabel = _alertTitleLabel;
+@synthesize alertTitleLabelHeightConstraint = _alertTitleLabelHeightConstraint;
+@synthesize alertMessageLabel = _alertMessageLabel;
 @synthesize alertActionStackView = _alertActionStackView;
-@synthesize alertStackViewHeightConstraint = _alertStackViewHeightConstraint;
+@synthesize alertActionStackViewHeightConstraint = _alertActionStackViewHeightConstraint;
 @synthesize tapRecognizer = _tapRecognizer;
 
 #pragma mark - Overridden Class Methods
@@ -163,21 +166,22 @@ static os_log_t alert_log;
     [self _setUpAlertControllerUI];
     
     // Configure Text
-    self.alertTitle.text = self.title;
-    self.alertMessage.text = self.message;
+    self.alertTitleLabel.text = self.alertTitle;
+    self.alertMessageLabel.text = self.message;
     
     // Configure Image
-    self.alertImage.image = self.image;
+    self.alertImageView.image = self.image;
     
     // Update Constraints
-    self.headerViewHeightConstraint.constant = (BOOL)self.alertImage.image ? 180.0f : 0.0f;
+    self.headerViewHeightConstraint.constant = (BOOL)self.alertImageView.image ? 180.0f : 0.0f;
+    self.alertTitleLabelHeightConstraint.constant = (BOOL)self.alertTitle ? self.alertTitleTextFont.pointSize + 5.0f : 0.0f;
     
     // Set Up Background Tap Gesture Recognizer If Needed
     if (self.dismissOnBackgroundTap) {
         
         self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                      action:@selector(_dismissAlertControllerFromBackgroundTap)];
-        [self.alertMaskBackground addGestureRecognizer:self.tapRecognizer];
+        [self.alertMaskBackgroundImageView addGestureRecognizer:self.tapRecognizer];
         
     }
     
@@ -233,7 +237,7 @@ static os_log_t alert_log;
 - (void)setAlertTitleTextColor:(UIColor *)alertTitleTextColor {
     
     _alertTitleTextColor = alertTitleTextColor;
-    self.alertTitle.textColor = self.alertTitleTextColor;
+    self.alertTitleLabel.textColor = self.alertTitleTextColor;
     
 }
 
@@ -246,7 +250,7 @@ static os_log_t alert_log;
 - (void)setAlertTitleTextFont:(UIFont *)alertTitleTextFont {
     
     _alertTitleTextFont = alertTitleTextFont;
-    self.alertTitle.font = self.alertTitleTextFont;
+    self.alertTitleLabel.font = self.alertTitleTextFont;
     
 }
 
@@ -259,7 +263,7 @@ static os_log_t alert_log;
 - (void)setAlertMessageTextColor:(UIColor *)alertMessageTextColor {
     
     _alertMessageTextColor = alertMessageTextColor;
-    self.alertMessage.textColor = self.alertMessageTextColor;
+    self.alertMessageLabel.textColor = self.alertMessageTextColor;
     
 }
 
@@ -272,7 +276,7 @@ static os_log_t alert_log;
 - (void)setAlertMessageTextFont:(UIFont *)alertMessageTextFont {
     
     _alertMessageTextFont = alertMessageTextFont;
-    self.alertMessage.font = self.alertMessageTextFont;
+    self.alertMessageLabel.font = self.alertMessageTextFont;
     
 }
 
@@ -328,9 +332,6 @@ static os_log_t alert_log;
     
 }
 
-
-
-
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
@@ -367,10 +368,8 @@ static os_log_t alert_log;
         // Basic setup
         [self _setUpAlertController];
         
-        // Assign title
-        self.title = title;
-        
         // Assign read-only properties
+        _alertTitle = title;
         _message = message;
         _image = image;
         _style = style;
@@ -409,25 +408,25 @@ static os_log_t alert_log;
     }
     
     // Instantiate textfield rather than accepting textfield param
-    UITextField *textField = [[UITextField alloc] init];
+    UITextField *textfield = [[UITextField alloc] init];
     
     // Customize textfield
-    textField.returnKeyType = UIReturnKeyDone;
-    textField.font = [UIFont systemFontOfSize:17.0f];
-    textField.textAlignment = NSTextAlignmentCenter;
-    [textField addTarget:self
+    textfield.returnKeyType = UIReturnKeyDone;
+    textfield.font = [UIFont systemFontOfSize:17.0f];
+    textfield.textAlignment = NSTextAlignmentCenter;
+    [textfield addTarget:self
                   action:@selector(_closeKeyboard:)
         forControlEvents:UIControlEventEditingDidEndOnExit];
     
     // Perform configuration block on textfeild
     if (configuration) {
         
-        configuration(textField);
+        configuration(textfield);
         
     }
     
     // Store textfield for use in -viewDidLoad
-    _textFields = [_textFields arrayByAddingObject:textField];
+    _textFields = [_textFields arrayByAddingObject:textfield];
     
 }
 
@@ -459,11 +458,11 @@ static os_log_t alert_log;
     
     // Set instance read-only properties
     _style = VSAlertControllerStyleAlert;
-    _message = @"";
+    _alertTitle = nil;
+    _message = nil;
     _image = nil;
     
     // Set instance property defaults
-    self.title = nil;
     self.animationStyle = VSAlertControllerAnimationStyleAutomatic;
     self.dismissOnBackgroundTap = NO;
     
@@ -472,47 +471,47 @@ static os_log_t alert_log;
 - (void)_setUpAlertControllerUI {
     
     /// Build alert view UI without xib
-    [self _setUpAlertMaskBackground];
+    [self _setUpAlertMaskBackgroundImageView];
     [self _setUpAlertView];
     [self _setUpHeaderView];
-    [self _setUpAlertImage];
-    [self _setUpAlertTitle];
-    [self _setUpAlertMessage];
+    [self _setUpAlertImageView];
+    [self _setUpAlertTitleLabel];
+    [self _setUpAlertMessageLabel];
     [self _setUpAlertActionStackView];
     
 }
 
-- (void)_setUpAlertMaskBackground {
+- (void)_setUpAlertMaskBackgroundImageView {
     
-    self.alertMaskBackground = [[UIImageView alloc] initWithFrame:CGRectZero];
-    self.alertMaskBackground.backgroundColor = [UIColor clearColor];
-    self.alertMaskBackground.translatesAutoresizingMaskIntoConstraints = NO;
-    self.alertMaskBackground.userInteractionEnabled = YES;
+    self.alertMaskBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.alertMaskBackgroundImageView.backgroundColor = [UIColor clearColor];
+    self.alertMaskBackgroundImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.alertMaskBackgroundImageView.userInteractionEnabled = YES;
     
-    [self.view addSubview:self.alertMaskBackground];
+    [self.view addSubview:self.alertMaskBackgroundImageView];
     
-    [self.view addConstraints:@[[NSLayoutConstraint constraintWithItem:self.alertMaskBackground
+    [self.view addConstraints:@[[NSLayoutConstraint constraintWithItem:self.alertMaskBackgroundImageView
                                                              attribute:NSLayoutAttributeWidth
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:self.view
                                                              attribute:NSLayoutAttributeWidth
                                                             multiplier:1.0f
                                                               constant:0.0f],
-                                [NSLayoutConstraint constraintWithItem:self.alertMaskBackground
+                                [NSLayoutConstraint constraintWithItem:self.alertMaskBackgroundImageView
                                                              attribute:NSLayoutAttributeHeight
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:self.view
                                                              attribute:NSLayoutAttributeHeight
                                                             multiplier:1.0f
                                                               constant:0.0f],
-                                [NSLayoutConstraint constraintWithItem:self.alertMaskBackground
+                                [NSLayoutConstraint constraintWithItem:self.alertMaskBackgroundImageView
                                                              attribute:NSLayoutAttributeCenterX
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:self.view
                                                              attribute:NSLayoutAttributeCenterX
                                                             multiplier:1.0f
                                                               constant:0.0f],
-                                [NSLayoutConstraint constraintWithItem:self.alertMaskBackground
+                                [NSLayoutConstraint constraintWithItem:self.alertMaskBackgroundImageView
                                                              attribute:NSLayoutAttributeCenterY
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:self.view
@@ -528,7 +527,7 @@ static os_log_t alert_log;
     self.alertView.backgroundColor = [UIColor whiteColor];
     self.alertView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self.alertMaskBackground addSubview:self.alertView];
+    [self.alertMaskBackgroundImageView addSubview:self.alertView];
     
     self.alertView.layer.cornerRadius = 5.0f;
     self.alertView.layer.masksToBounds = NO;
@@ -625,36 +624,36 @@ static os_log_t alert_log;
     
 }
 
-- (void)_setUpAlertImage {
+- (void)_setUpAlertImageView {
     
-    self.alertImage = [[UIImageView alloc] initWithFrame:CGRectZero];
-    self.alertImage.translatesAutoresizingMaskIntoConstraints = NO;
-    self.alertImage.contentMode = UIViewContentModeScaleAspectFit;
+    self.alertImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.alertImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.alertImageView.contentMode = UIViewContentModeScaleAspectFit;
     
-    [self.headerView addSubview:self.alertImage];
+    [self.headerView addSubview:self.alertImageView];
     
-    [self.headerView addConstraints:@[[NSLayoutConstraint constraintWithItem:self.alertImage
+    [self.headerView addConstraints:@[[NSLayoutConstraint constraintWithItem:self.alertImageView
                                                                    attribute:NSLayoutAttributeTop
                                                                    relatedBy:NSLayoutRelationEqual
                                                                       toItem:self.headerView
                                                                    attribute:NSLayoutAttributeTop
                                                                   multiplier:1.0f
                                                                     constant:0.0f],
-                                      [NSLayoutConstraint constraintWithItem:self.alertImage
+                                      [NSLayoutConstraint constraintWithItem:self.alertImageView
                                                                    attribute:NSLayoutAttributeLeft
                                                                    relatedBy:NSLayoutRelationEqual
                                                                       toItem:self.headerView
                                                                    attribute:NSLayoutAttributeLeft
                                                                   multiplier:1.0f
                                                                     constant:0.0f],
-                                      [NSLayoutConstraint constraintWithItem:self.alertImage
+                                      [NSLayoutConstraint constraintWithItem:self.alertImageView
                                                                    attribute:NSLayoutAttributeRight
                                                                    relatedBy:NSLayoutRelationEqual
                                                                       toItem:self.headerView
                                                                    attribute:NSLayoutAttributeRight
                                                                   multiplier:1.0f
                                                                     constant:0.0f],
-                                      [NSLayoutConstraint constraintWithItem:self.alertImage
+                                      [NSLayoutConstraint constraintWithItem:self.alertImageView
                                                                    attribute:NSLayoutAttributeBottom
                                                                    relatedBy:NSLayoutRelationEqual
                                                                       toItem:self.headerView
@@ -664,83 +663,84 @@ static os_log_t alert_log;
     
 }
 
-- (void)_setUpAlertTitle {
+- (void)_setUpAlertTitleLabel {
     
-    self.alertTitle = [[UILabel alloc] init];
-    self.alertTitle.font = self.alertTitleTextFont;
-    self.alertTitle.textColor = self.alertTitleTextColor;
-    self.alertTitle.numberOfLines = 0;
-    self.alertTitle.textAlignment = NSTextAlignmentCenter;
-    self.alertTitle.translatesAutoresizingMaskIntoConstraints = NO;
+    self.alertTitleLabel = [[UILabel alloc] init];
+    self.alertTitleLabel.font = self.alertTitleTextFont;
+    self.alertTitleLabel.textColor = self.alertTitleTextColor;
+    self.alertTitleLabel.numberOfLines = 0;
+    self.alertTitleLabel.textAlignment = NSTextAlignmentCenter;
+    self.alertTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self.alertView addSubview:self.alertTitle];
+    [self.alertView addSubview:self.alertTitleLabel];
     
-    CGFloat height = self.title ? 23.0f : 0.0f;
-    
-    [self.alertView addConstraints:@[[NSLayoutConstraint constraintWithItem:self.alertTitle
+    [self.alertView addConstraints:@[[NSLayoutConstraint constraintWithItem:self.alertTitleLabel
                                                                   attribute:NSLayoutAttributeTop
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:self.headerView
                                                                   attribute:NSLayoutAttributeBottom
                                                                  multiplier:1.0f
                                                                    constant:10.0f],
-                                     [NSLayoutConstraint constraintWithItem:self.alertTitle
+                                     [NSLayoutConstraint constraintWithItem:self.alertTitleLabel
                                                                   attribute:NSLayoutAttributeLeft
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:self.alertView
                                                                   attribute:NSLayoutAttributeLeft
                                                                  multiplier:1.0f
                                                                    constant:8.0f],
-                                     [NSLayoutConstraint constraintWithItem:self.alertTitle
+                                     [NSLayoutConstraint constraintWithItem:self.alertTitleLabel
                                                                   attribute:NSLayoutAttributeRight
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:self.alertView
                                                                   attribute:NSLayoutAttributeRight
                                                                  multiplier:1.0f
-                                                                   constant:-8.0f],
-                                     [NSLayoutConstraint constraintWithItem:self.alertTitle
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                 multiplier:0.0f
-                                                                   constant:height]]];
+                                                                   constant:-8.0f]]];
+    
+    self.alertTitleLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:self.alertTitleLabel
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                       multiplier:0.0f
+                                                                         constant:0.0f];
+    
+    [self.alertView addConstraint:self.alertTitleLabelHeightConstraint];
     
 }
 
-- (void)_setUpAlertMessage {
+- (void)_setUpAlertMessageLabel {
     
-    self.alertMessage = [[UILabel alloc] init];
-    self.alertMessage.font = self.alertMessageTextFont;
-    self.alertMessage.textColor = self.alertMessageTextColor;
-    self.alertMessage.numberOfLines = 0;
-    self.alertMessage.textAlignment = NSTextAlignmentCenter;
-    self.alertMessage.translatesAutoresizingMaskIntoConstraints = NO;
+    self.alertMessageLabel = [[UILabel alloc] init];
+    self.alertMessageLabel.font = self.alertMessageTextFont;
+    self.alertMessageLabel.textColor = self.alertMessageTextColor;
+    self.alertMessageLabel.numberOfLines = 0;
+    self.alertMessageLabel.textAlignment = NSTextAlignmentCenter;
+    self.alertMessageLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self.alertView addSubview:self.alertMessage];
+    [self.alertView addSubview:self.alertMessageLabel];
     
-    [self.alertView addConstraints:@[[NSLayoutConstraint constraintWithItem:self.alertMessage
+    [self.alertView addConstraints:@[[NSLayoutConstraint constraintWithItem:self.alertMessageLabel
                                                                   attribute:NSLayoutAttributeTop
                                                                   relatedBy:NSLayoutRelationEqual
-                                                                     toItem:self.alertTitle
+                                                                     toItem:self.alertTitleLabel
                                                                   attribute:NSLayoutAttributeBottom
                                                                  multiplier:1.0f
                                                                    constant:8.0f],
-                                     [NSLayoutConstraint constraintWithItem:self.alertMessage
+                                     [NSLayoutConstraint constraintWithItem:self.alertMessageLabel
                                                                   attribute:NSLayoutAttributeLeft
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:self.alertView
                                                                   attribute:NSLayoutAttributeLeft
                                                                  multiplier:1.0f
                                                                    constant:8.0f],
-                                     [NSLayoutConstraint constraintWithItem:self.alertMessage
+                                     [NSLayoutConstraint constraintWithItem:self.alertMessageLabel
                                                                   attribute:NSLayoutAttributeRight
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:self.alertView
                                                                   attribute:NSLayoutAttributeRight
                                                                  multiplier:1.0f
                                                                    constant:-8.0f],
-                                     [NSLayoutConstraint constraintWithItem:self.alertMessage
+                                     [NSLayoutConstraint constraintWithItem:self.alertMessageLabel
                                                                   attribute:NSLayoutAttributeHeight
                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                      toItem:nil
@@ -761,7 +761,7 @@ static os_log_t alert_log;
     [self.alertView addConstraints:@[[NSLayoutConstraint constraintWithItem:self.alertActionStackView
                                                                   attribute:NSLayoutAttributeTop
                                                                   relatedBy:NSLayoutRelationEqual
-                                                                     toItem:self.alertMessage
+                                                                     toItem:self.alertMessageLabel
                                                                   attribute:NSLayoutAttributeBottom
                                                                  multiplier:1.0f
                                                                    constant:8.0f],
@@ -787,14 +787,14 @@ static os_log_t alert_log;
                                                                  multiplier:1.0f
                                                                    constant:0.0f]]];
     
-    self.alertStackViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.alertActionStackView
-                                                                       attribute:NSLayoutAttributeHeight
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:nil
-                                                                       attribute:NSLayoutAttributeHeight
-                                                                      multiplier:0.0f
-                                                                        constant:60.0f];
-    [self.alertView addConstraint:self.alertStackViewHeightConstraint];
+    self.alertActionStackViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.alertActionStackView
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:nil
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                            multiplier:0.0f
+                                                                              constant:60.0f];
+    [self.alertView addConstraint:self.alertActionStackViewHeightConstraint];
     
 }
 
@@ -966,12 +966,12 @@ static os_log_t alert_log;
     
     if (self.alertActionStackView.arrangedSubviews.count > 2 || self.hasTextFieldAdded || self.style == VSAlertControllerStyleActionSheet) {
         
-        self.alertStackViewHeightConstraint.constant = self.alertStackViewHeight * ((CGFloat)self.alertActionStackView.arrangedSubviews.count);
+        self.alertActionStackViewHeightConstraint.constant = self.alertStackViewHeight * ((CGFloat)self.alertActionStackView.arrangedSubviews.count);
         self.alertActionStackView.axis = UILayoutConstraintAxisVertical;
         
     } else {
         
-        self.alertStackViewHeightConstraint.constant= self.alertStackViewHeight;
+        self.alertActionStackViewHeightConstraint.constant= self.alertStackViewHeight;
         self.alertActionStackView.axis = UILayoutConstraintAxisHorizontal;
         
     }

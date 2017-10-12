@@ -226,6 +226,11 @@ typedef NS_ENUM(NSInteger, VSAlertControllerAnimationStyle) {
 @property (NS_NONATOMIC_IOSONLY, strong, readonly, nonnull) NSArray<UITextField *> *textFields;
 
 /**
+ The title of the alert
+ */
+@property (NS_NONATOMIC_IOSONLY, strong, readonly, nullable) NSString *alertTitle;
+
+/**
  The style of the alert
  */
 @property (NS_NONATOMIC_IOSONLY, assign, readonly) VSAlertControllerStyle style;

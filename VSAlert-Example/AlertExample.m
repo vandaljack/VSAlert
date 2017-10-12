@@ -101,133 +101,133 @@ static os_log_t example_alert;
     
     if (exampleType == AlertExampleTypeBasic) {
         
-        return NSLocalizedString(@"Basic (Alert)", nil);
+        return NSLocalizedString(@"Basic", nil);
         
     }
     
     if (exampleType == AlertExampleTypeCancel) {
         
-        return NSLocalizedString(@"Cancel (Alert)", nil);
+        return NSLocalizedString(@"Cancel", nil);
         
     }
     
     if (exampleType == AlertExampleTypeDestructive) {
         
-        return NSLocalizedString(@"Destructive (Alert)", nil);
+        return NSLocalizedString(@"Destructive", nil);
         
     }
     
     if (exampleType == AlertExampleTypeMultiChoice) {
         
-        return NSLocalizedString(@"Multi-Choice (Alert)", nil);
+        return NSLocalizedString(@"Multi-Choice", nil);
         
     }
     
     if (exampleType == AlertExampleTypeTextField1) {
         
-        return NSLocalizedString(@"Text Field 1 (Alert)", nil);
+        return NSLocalizedString(@"Text Field 1", nil);
         
     }
     
     if (exampleType == AlertExampleTypeTextField2) {
         
-        return NSLocalizedString(@"Text Field 2 (Alert)", nil);
+        return NSLocalizedString(@"Text Field 2", nil);
         
     }
     
     if (exampleType == AlertExampleTypeImage) {
         
-        return NSLocalizedString(@"Image (Alert)", nil);
+        return NSLocalizedString(@"Image", nil);
         
     }
     
     if (exampleType == AlertExampleTypeStyled) {
         
-        return NSLocalizedString(@"Styled (Alert)", nil);
+        return NSLocalizedString(@"Styled", nil);
         
     }
     
     if (exampleType == AlertExampleTypeWalkthroughBasic) {
         
-        return NSLocalizedString(@"Basic (Walkthrough)", nil);
+        return NSLocalizedString(@"Basic", nil);
         
     }
     
     if (exampleType == AlertExampleTypeWalkthroughCancel) {
         
-        return NSLocalizedString(@"Cancel (Walkthrough)", nil);
+        return NSLocalizedString(@"Cancel", nil);
         
     }
     
     if (exampleType == AlertExampleTypeWalkthroughDestructive) {
         
-        return NSLocalizedString(@"Destructive (Walkthrough)", nil);
+        return NSLocalizedString(@"Destructive", nil);
         
     }
     
     if (exampleType == AlertExampleTypeWalkthroughMultiChoice) {
         
-        return NSLocalizedString(@"Multi-Choice (Walkthrough)", nil);
+        return NSLocalizedString(@"Multi-Choice", nil);
         
     }
     
     if (exampleType == AlertExampleTypeWalkthroughTextField1) {
         
-        return NSLocalizedString(@"Text Field 1 (Walkthrough)", nil);
+        return NSLocalizedString(@"Text Field 1", nil);
         
     }
     
     if (exampleType == AlertExampleTypeWalkthroughTextField2) {
         
-        return NSLocalizedString(@"Text Field 2 (Walkthrough)", nil);
+        return NSLocalizedString(@"Text Field 2", nil);
         
     }
     
     if (exampleType == AlertExampleTypeWalkthroughImage) {
         
-        return NSLocalizedString(@"Image (Walkthrough)", nil);
+        return NSLocalizedString(@"Image", nil);
         
     }
     
     if (exampleType == AlertExampleTypeWalkthroughStyled) {
         
-        return NSLocalizedString(@"Styled (Walkthrough)", nil);
+        return NSLocalizedString(@"Styled", nil);
         
     }
     
     if (exampleType == AlertExampleTypeActionSheetBasic) {
         
-        return NSLocalizedString(@"Basic (Action Sheet)", nil);
+        return NSLocalizedString(@"Basic", nil);
         
     }
     
     if (exampleType == AlertExampleTypeActionSheetCancel) {
         
-        return NSLocalizedString(@"Cancel (Action Sheet)", nil);
+        return NSLocalizedString(@"Cancel", nil);
         
     }
     
     if (exampleType == AlertExampleTypeActionSheetDestructive) {
         
-        return NSLocalizedString(@"Destructive (Action Sheet)", nil);
+        return NSLocalizedString(@"Destructive", nil);
         
     }
     
     if (exampleType == AlertExampleTypeActionSheetMultiChoice) {
         
-        return NSLocalizedString(@"Multi-Choice (Action Sheet)", nil);
+        return NSLocalizedString(@"Multi-Choice", nil);
         
     }
     
     if (exampleType == AlertExampleTypeActionSheetImage) {
         
-        return NSLocalizedString(@"Image (Action Sheet)", nil);
+        return NSLocalizedString(@"Image", nil);
         
     }
     
     if (exampleType == AlertExampleTypeActionSheetStyled) {
         
-        return NSLocalizedString(@"Styled (Action Sheet)", nil);
+        return NSLocalizedString(@"Styled", nil);
         
     }
     
