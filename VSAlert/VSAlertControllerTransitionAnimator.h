@@ -19,7 +19,7 @@ extern NSString * _Nonnull const VSAlertControllerTransitionAnimatorNotImplement
 extern NSString * _Nonnull const VSAlertControllerTransitionAnimatorInvalidUsageException;
 
 /**
- VSAlertControllerTransitionAnimator is a class used to manage modal transitions to and from VSAlertController objects. The class's interface is described in a project header, and thus does not appear in the library's documentation/
+ VSAlertControllerTransitionAnimator is a class used to manage modal transitions to and from VSAlertController objects. The class's interface is described in a project header, and thus does not appear in the library's documentation.
  */
 @interface VSAlertControllerTransitionAnimator : NSObject<UIViewControllerAnimatedTransitioning>
 

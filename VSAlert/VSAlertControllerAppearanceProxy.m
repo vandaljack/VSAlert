@@ -9,9 +9,4 @@
 
 @implementation VSAlertControllerAppearanceProxy
 
-@synthesize alertTitleTextColor = _alertTitleTextColor;
-@synthesize alertTitleTextFont = _alertTitleTextFont;
-@synthesize alertMessageTextColor = _alertMessageTextColor;
-@synthesize alertMessageTextFont = _alertMessageTextFont;
-
 @end

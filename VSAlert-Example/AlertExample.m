@@ -319,7 +319,7 @@ static os_log_t example_alert;
                                                                style:VSAlertActionStyleDefault
                                                               action:^(VSAlertAction *action) {
                                                                   
-                                                                  os_log_info(example_alert, "%@", controller.textFields[0].text);
+                                                                  os_log_info(example_alert, "%@", controller.textfields[0].text);
                                                                   
                                                               }];
         [controller addAction:action1];
@@ -352,8 +352,8 @@ static os_log_t example_alert;
                                                                style:VSAlertActionStyleDefault
                                                               action:^(VSAlertAction *action) {
                                                                   
-                                                                  os_log_info(example_alert, "Email: %@", controller.textFields[0].text);
-                                                                  os_log_info(example_alert, "Password: %@", controller.textFields[1].text);
+                                                                  os_log_info(example_alert, "Email: %@", controller.textfields[0].text);
+                                                                  os_log_info(example_alert, "Password: %@", controller.textfields[1].text);
                                                                   
                                                               }];
         [controller addAction:action1];
@@ -482,7 +482,7 @@ static os_log_t example_alert;
                                                                style:VSAlertActionStyleDefault
                                                               action:^(VSAlertAction *action) {
                                                                   
-                                                                  os_log_info(example_alert, "%@", controller.textFields[0].text);
+                                                                  os_log_info(example_alert, "%@", controller.textfields[0].text);
                                                                   
                                                               }];
         [controller addAction:action1];
@@ -515,8 +515,8 @@ static os_log_t example_alert;
                                                                style:VSAlertActionStyleDefault
                                                               action:^(VSAlertAction *action) {
                                                                   
-                                                                  os_log_info(example_alert, "Email: %@", controller.textFields[0].text);
-                                                                  os_log_info(example_alert, "Password: %@", controller.textFields[1].text);
+                                                                  os_log_info(example_alert, "Email: %@", controller.textfields[0].text);
+                                                                  os_log_info(example_alert, "Password: %@", controller.textfields[1].text);
                                                                   
                                                               }];
         [controller addAction:action1];

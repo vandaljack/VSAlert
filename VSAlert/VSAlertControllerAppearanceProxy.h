@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- VSAlertControllerAppearanceProxy is a class used to support the UIAppearance protocol in VSAlertController, because VSAlertController does not inherit from an object that includes this support. This classes interface is described in a project header, and thus does not appear in the library documentation.
+ VSAlertControllerAppearanceProxy is a class used to support the UIAppearance protocol in VSAlertController, because VSAlertController does not inherit from an object that includes this support. This class's interface is described in a project header, and thus does not appear in the library documentation.
  */
 @interface VSAlertControllerAppearanceProxy : UIView<UIAppearance>
 
