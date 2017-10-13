@@ -22,6 +22,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0710D7521F903957009F8553 /* VSAlertBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0710D7501F903957009F8553 /* VSAlertBannerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0710D7531F903957009F8553 /* VSAlertBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710D7511F903957009F8553 /* VSAlertBannerView.m */; };
+		0710D7541F903962009F8553 /* VSAlertBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710D7511F903957009F8553 /* VSAlertBannerView.m */; };
 		0710F9C61F8B1E1A00C6D084 /* VSAlert.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0710F9C11F8B1E0F00C6D084 /* VSAlert.h */; };
 		0710F9C71F8B1E2000C6D084 /* VSAlertAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 0710F9C41F8B1E1000C6D084 /* VSAlertAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0710F9C81F8B1E2200C6D084 /* VSAlertController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0710F9C31F8B1E1000C6D084 /* VSAlertController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,6 +80,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0710D7501F903957009F8553 /* VSAlertBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VSAlertBannerView.h; sourceTree = "<group>"; };
+		0710D7511F903957009F8553 /* VSAlertBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VSAlertBannerView.m; sourceTree = "<group>"; };
 		0710F9A91F8B09FB00C6D084 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0710F9AA1F8B0A0600C6D084 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		0710F9C11F8B1E0F00C6D084 /* VSAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VSAlert.h; sourceTree = "<group>"; };
@@ -148,6 +153,8 @@
 				074538161F8C437700092DAF /* VSAlertControllerTransitionAnimator.m */,
 				07F25AB61F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.h */,
 				07F25AB71F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.m */,
+				0710D7501F903957009F8553 /* VSAlertBannerView.h */,
+				0710D7511F903957009F8553 /* VSAlertBannerView.m */,
 			);
 			name = Src;
 			sourceTree = "<group>";
@@ -233,6 +240,7 @@
 				074538171F8C437700092DAF /* VSAlertControllerTransitionAnimator.h in Headers */,
 				0710F9C81F8B1E2200C6D084 /* VSAlertController.h in Headers */,
 				07F25AB81F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.h in Headers */,
+				0710D7521F903957009F8553 /* VSAlertBannerView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +379,7 @@
 				0710F9C91F8B1E3500C6D084 /* VSAlertAction.m in Sources */,
 				074538191F8C437700092DAF /* VSAlertControllerTransitionAnimator.m in Sources */,
 				0710F9CA1F8B1E3700C6D084 /* VSAlertController.m in Sources */,
+				0710D7531F903957009F8553 /* VSAlertBannerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +391,7 @@
 				07FF9E171F8FEF8C002966A3 /* AlertExample.m in Sources */,
 				07FF9E4D1F8FF1CB002966A3 /* VSAlertAction.m in Sources */,
 				07FF9E4F1F8FF1D1002966A3 /* VSAlertControllerTransitionAnimator.m in Sources */,
+				0710D7541F903962009F8553 /* VSAlertBannerView.m in Sources */,
 				07FF9E191F8FEF92002966A3 /* AlertExampleViewController.m in Sources */,
 				07FF9E1A1F8FEF98002966A3 /* main.m in Sources */,
 				07F25ABA1F8FFA98000B4784 /* VSAlertControllerAppearanceProxy.m in Sources */,
